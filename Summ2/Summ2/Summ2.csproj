@@ -8,7 +8,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F18A4C66-ACB7-44AA-B488-285277E4A1A3}</ProjectGuid>
+    <ProjectGuid>{B74D666C-2169-4397-82D5-52CE771DAB8C}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -114,6 +114,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.4\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.4\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -175,24 +187,28 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\tblCardsController.cs" />
-    <Compile Include="Controllers\tblCategoriesController.cs" />
-    <Compile Include="Controllers\tblDecksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CollectionContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\MijnContext.cs" />
-    <Compile Include="Models\tblCard.cs" />
+    <Compile Include="Models\tblCategoriesController.cs" />
     <Compile Include="Models\tblCategory.cs" />
-    <Compile Include="Models\tblDeck.cs" />
+    <Compile Include="Models\tblCollection.cs" />
+    <Compile Include="Models\tblCollectionsController.cs" />
+    <Compile Include="Models\tblItem.cs" />
+    <Compile Include="Models\tblItemCategoriesController.cs" />
+    <Compile Include="Models\tblItemCategory.cs" />
+    <Compile Include="Models\tblItemsController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CollectionViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -250,21 +266,26 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\tblCards\Create.cshtml" />
-    <Content Include="Views\tblCards\Delete.cshtml" />
-    <Content Include="Views\tblCards\Details.cshtml" />
-    <Content Include="Views\tblCards\Edit.cshtml" />
-    <Content Include="Views\tblCards\Index.cshtml" />
     <Content Include="Views\tblCategories\Create.cshtml" />
     <Content Include="Views\tblCategories\Delete.cshtml" />
     <Content Include="Views\tblCategories\Details.cshtml" />
     <Content Include="Views\tblCategories\Edit.cshtml" />
     <Content Include="Views\tblCategories\Index.cshtml" />
-    <Content Include="Views\tblDecks\Create.cshtml" />
-    <Content Include="Views\tblDecks\Delete.cshtml" />
-    <Content Include="Views\tblDecks\Details.cshtml" />
-    <Content Include="Views\tblDecks\Edit.cshtml" />
-    <Content Include="Views\tblDecks\Index.cshtml" />
+    <Content Include="Views\tblCollections\Create.cshtml" />
+    <Content Include="Views\tblCollections\Delete.cshtml" />
+    <Content Include="Views\tblCollections\Details.cshtml" />
+    <Content Include="Views\tblCollections\Edit.cshtml" />
+    <Content Include="Views\tblCollections\Index.cshtml" />
+    <Content Include="Views\tblItems\Create.cshtml" />
+    <Content Include="Views\tblItems\Delete.cshtml" />
+    <Content Include="Views\tblItems\Details.cshtml" />
+    <Content Include="Views\tblItems\Edit.cshtml" />
+    <Content Include="Views\tblItems\Index.cshtml" />
+    <Content Include="Views\tblItemCategories\Create.cshtml" />
+    <Content Include="Views\tblItemCategories\Delete.cshtml" />
+    <Content Include="Views\tblItemCategories\Details.cshtml" />
+    <Content Include="Views\tblItemCategories\Edit.cshtml" />
+    <Content Include="Views\tblItemCategories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -298,9 +319,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50464</DevelopmentServerPort>
+          <DevelopmentServerPort>50108</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50464/</IISUrl>
+          <IISUrl>http://localhost:50108/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

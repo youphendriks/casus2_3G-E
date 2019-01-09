@@ -12,7 +12,7 @@ namespace Summ2.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblCategory()
         {
-            tblCards = new HashSet<tblCard>();
+            tblItemCategories = new HashSet<tblItemCategory>();
         }
 
         [Key]
@@ -20,7 +20,9 @@ namespace Summ2.Models
 
         public string CategoryName { get; set; }
 
+        public string CategoryBeschrijving { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblCard> tblCards { get; set; }
+        public virtual ICollection<tblItemCategory> tblItemCategories { get; set; }
     }
 }
