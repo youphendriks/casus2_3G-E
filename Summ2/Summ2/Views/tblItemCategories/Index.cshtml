@@ -17,6 +17,12 @@
         <th>
             @Html.DisplayNameFor(model => model.tblItem.ItemName)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StatusBeschrijving)
+        </th>
         <th></th>
     </tr>
 
@@ -29,9 +35,15 @@
             @Html.DisplayFor(modelItem => item.tblItem.ItemName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ItemCategoryID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ItemCategoryID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ItemCategoryID })
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusBeschrijving)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ItemCategoryID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ItemCategoryID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ItemCategoryID })
         </td>
     </tr>
 }

@@ -18,6 +18,7 @@ namespace Summ2.Models
         public ActionResult Index(int? id)
         {
             var viewModel = new CollectionViewModel();
+
             viewModel.tblCategory = db.tblCategories;
            
             if (id != null)
@@ -28,7 +29,7 @@ namespace Summ2.Models
                 viewModel.tblItemCategory = db.tblCategories.Where(i => i.CategoryID == id.Value).Single().tblItemCategories;
                 foreach (tblItemCategory pp in viewModel.tblItemCategory)
                 {
-                    eenItem = (tblItem)db.tblItems.Where(i => i.ItemID == pp.ItemID).Single();
+                    eenItem = (tblItem) db.tblItems.Where(i => i.ItemID == pp.ItemID).Single();
                     items.Add(eenItem);
                 }
                 viewModel.tblItem = items;

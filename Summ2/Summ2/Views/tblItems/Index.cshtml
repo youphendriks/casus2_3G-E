@@ -5,7 +5,15 @@
 }
 
 <h2>Index</h2>
+<p>
+    <select id="Select1">
+        @foreach (var item in )
+        {
+            <option></option>
+        }
 
+    </select>
+</p>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -35,9 +43,15 @@
         <th>
             Price Difference
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StatusBeschrijving)
+        </th>
         <th></th>
     </tr>
-
+    @* Maak een tweede edit pagina om na een eerste wijziging de edit te controleren, en af of goed te keuren. Met if. *@
 @foreach (var item in Model) {
     <tr>
         <td>
@@ -63,6 +77,12 @@
         </td>
         <td>
             @(item.CurrentPrice - item.BuyPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusBeschrijving)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.ItemID }) |

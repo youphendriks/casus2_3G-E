@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Summ2.ViewModels.CollectionViewModel>
+﻿@model Summ2.ViewModels.CollectionViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -12,13 +12,21 @@
 <table class="table">
     <tr>
         <th>
+            Category Naam
             @*@Html.DisplayNameFor(model => model.CategoryName)*@
         </th>
         <th>
+            Category Beschrijving
             @*@Html.DisplayNameFor(model => model.CategoryBeschrijving)*@
         </th>
         <th>
             Price Difference Category
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Status Beschrijving
         </th>
         <th></th>
     </tr>
@@ -32,7 +40,14 @@
             @Html.DisplayFor(modelItem => item.CategoryBeschrijving)
         </td>
         <td>
-        
+            @* Zie hoofdstuk 10 in boek om via sql rapporten te maken voor totaal prijs.
+            Get ID category, spreek class aan en geef id mee, return lijst of int met gemaakte winst voor de category*@
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusBeschrijving)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) |
