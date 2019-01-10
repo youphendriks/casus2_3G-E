@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Summ2.ViewModels;
 
 namespace Summ2.Models
 {
@@ -14,11 +15,33 @@ namespace Summ2.Models
         private CollectionContext db = new CollectionContext();
 
         // GET: tblItems
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            var tblItems = db.tblItems.Include(t => t.tblCollection);
-            return View(tblItems.ToList());
+            var viewModel = new CollectionViewModel();
+            
+            viewModel.tblCollection = db.tblCollections;
+
+            if (id != null)
+            {
+                viewModel.tblItem = db.tblItems.Where(i => i.ColletionID == id.Value);
+                //ViewBag.Collection = ;
+                //viewModel.tblItem = viewModel.tblCollection.Where(i => i.CollectionID == id.Value).Single().tblItem;
+
+                //viewModel.tblCategory = db.tblCategories;
+                //var categories = new List<tblCategory>();
+                //tblCategory eenCategory = new tblCategory();
+                //viewModel.tblItemCategory = db.tblItems.Where(i => i.ItemID == id.Value).Single().tblItemCategories;
+                //foreach (tblItemCategory pp in viewModel.tblItemCategory)
+                //{
+                //    eenCategory = (tblCategory) db.tblCategories.Where(i => i.CategoryID == pp.CategoryID).Single();
+                //    categories.Add(eenCategory);
+                //}
+                //viewModel.tblCategory = categories;
+
+            }
+            return View(viewModel);
         }
+        
       
         // GET: tblItems/Details/5
         public ActionResult Details(int? id)

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Summ2.Models.tblItem>
+﻿@model Summ2.ViewModels.CollectionViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -6,57 +6,66 @@
 
 <h2>Index</h2>
 <p>
-    <select id="Select1">
-        @foreach (var item in )
+    @*<select id="Select1">*@
+    <h4>
+        Select your collection:
+    </h4>
+        @foreach (var item in Model.tblCollection)
         {
-            <option></option>
+            @*<option id="@item.CollectionID">
+                @item.CollectionName
+            </option>*@
+            @Html.ActionLink(item.CollectionName, "Index", new { id = item.CollectionID });
+    <b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
         }
-
-    </select>
+    @*</select>*@
+    @*@Html.ActionLink("Select", "Index", new { id = item.CollectionID })*@
 </p>
+
+@if (Model.tblItem != null)
+{
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <h6>
+        Create a new item:
+
+        @Html.ActionLink("Create New", "Create")
+    </h6>
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.tblCollection.CollectionName)
+            Item Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ItemName)
+            Item Beschrijving
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ItemBeschrijving)
+            Item Owned
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ItemOwned)
+            Item State
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ItemState)
+            Buy Price
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BuyPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CurrentPrice)
+            Current Price
         </th>
         <th>
             Price Difference
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            Status
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StatusBeschrijving)
+            Status Beschrijving
         </th>
         <th></th>
     </tr>
     @* Maak een tweede edit pagina om na een eerste wijziging de edit te controleren, en af of goed te keuren. Met if. *@
-@foreach (var item in Model) {
+    @foreach (var item in Model.tblItem)
+    {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.tblCollection.CollectionName)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.ItemName)
         </td>
@@ -90,6 +99,7 @@
             @Html.ActionLink("Delete", "Delete", new { id = item.ItemID })
         </td>
     </tr>
-}
+    }
 
 </table>
+}
