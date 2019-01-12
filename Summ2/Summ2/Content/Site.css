@@ -1,7 +1,9 @@
-﻿body {
+﻿
+body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background-color: darkgray;
+    background-color: #404040;
+    color: black;
 }
 
 footer {
@@ -12,7 +14,11 @@ footer {
     text-align: center;
 }
 
-th, td {
+th {
+    background-color: #ddd;
+}
+
+td {
     border-bottom: 1px solid #000000;
 }
 /* Set padding to keep content from hitting the edges */
