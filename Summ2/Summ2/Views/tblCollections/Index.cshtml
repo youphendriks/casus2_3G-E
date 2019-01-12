@@ -9,13 +9,19 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table table-striped table-hover table-borderless table-responsive border-0">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.CollectionName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CollectionDiscription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StatusBeschrijving)
         </th>
         <th></th>
     </tr>
@@ -29,10 +35,27 @@
             @Html.DisplayFor(modelItem => item.CollectionDiscription)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CollectionID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CollectionID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CollectionID })
+            @Html.DisplayFor(modelItem => item.Status)
         </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusBeschrijving)
+        </td>
+        @if (item.Status == "Te Accorderen wijziging" || item.Status == "Te Accorderen creatie")
+        {
+            <td>
+                @Html.ActionLink("Controlleer wijziging", "Edit2", new { id = item.CollectionID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CollectionID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CollectionID })
+            </td>
+        }
+        @if (item.Status == "In orde" || item.Status == "Afgekeurd")
+        {
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CollectionID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CollectionID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CollectionID })
+            </td>
+        }
     </tr>
 }
 

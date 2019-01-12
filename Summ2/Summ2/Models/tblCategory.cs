@@ -22,6 +22,10 @@ namespace Summ2.Models
 
         public string CategoryBeschrijving { get; set; }
 
+        public string Status { get; set; }
+
+        public string StatusBeschrijving { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblItemCategory> tblItemCategories { get; set; }
     }

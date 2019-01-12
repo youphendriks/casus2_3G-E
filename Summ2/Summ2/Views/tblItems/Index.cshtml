@@ -1,48 +1,71 @@
-﻿@model IEnumerable<Summ2.Models.tblItem>
+﻿@model Summ2.ViewModels.CollectionViewModel
 
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
-
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @*<select id="Select1">*@
+    <h4>
+        Select your collection:
+    </h4>
+        @foreach (var item in Model.tblCollection)
+        {
+            @*<option id="@item.CollectionID">
+                @item.CollectionName
+            </option>*@
+            @Html.ActionLink(item.CollectionName, "Index", new { id = item.CollectionID });
+    <b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
+        }
+    @*</select>*@
+    @*@Html.ActionLink("Select", "Index", new { id = item.CollectionID })*@
 </p>
-<table class="table">
+
+@if (Model.tblItem != null)
+{
+<p>
+    <h6>
+        Create a new item:
+
+        @Html.ActionLink("Create New", "Create")
+    </h6>
+</p>
+<table class="table table-striped table-hover table-borderless table-responsive border-0">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.tblCollection.CollectionName)
+            Item Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ItemName)
+            Item Beschrijving
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ItemBeschrijving)
+            Item Owned
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ItemOwned)
+            Item State
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ItemState)
+            Buy Price
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BuyPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CurrentPrice)
+            Current Price
         </th>
         <th>
             Price Difference
         </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Status Beschrijving
+        </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
+    @* Maak een tweede edit pagina om na een eerste wijziging de edit te controleren, en af of goed te keuren. Met if. *@
+    @foreach (var item in Model.tblItem)
+    {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.tblCollection.CollectionName)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.ItemName)
         </td>
@@ -65,11 +88,29 @@
             @(item.CurrentPrice - item.BuyPrice)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ItemID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ItemID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ItemID })
+            @Html.DisplayFor(modelItem => item.Status)
         </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusBeschrijving)
+        </td>
+        @if (item.Status == "Te Accorderen wijziging" || item.Status == "Te Accorderen creatie")
+        {
+            <td>
+                @Html.ActionLink("Controlleer wijziging", "Edit2", new { id = item.ItemID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ItemID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ItemID })
+            </td>
+        }
+        @if (item.Status == "In orde" || item.Status == "Afgekeurd")
+        {
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ItemID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ItemID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ItemID })
+            </td>
+        }
     </tr>
-}
+    }
 
 </table>
+}

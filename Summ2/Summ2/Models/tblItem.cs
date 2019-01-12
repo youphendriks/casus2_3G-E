@@ -32,7 +32,9 @@ namespace Summ2.Models
 
         public int? CurrentPrice { get; set; }
 
-        public int? PriceDifference { get; set; }
+        public string Status { get; set; }
+
+        public string StatusBeschrijving { get; set; }
 
         public virtual tblCollection tblCollection { get; set; }
 

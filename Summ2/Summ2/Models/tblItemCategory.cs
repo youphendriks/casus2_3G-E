@@ -16,6 +16,10 @@ namespace Summ2.Models
 
         public int CategoryID { get; set; }
 
+        public string Status { get; set; }
+
+        public string StatusBeschrijving { get; set; }
+
         public virtual tblCategory tblCategory { get; set; }
 
         public virtual tblItem tblItem { get; set; }

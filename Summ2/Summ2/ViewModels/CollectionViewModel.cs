@@ -12,6 +12,8 @@ namespace Summ2.ViewModels
         public IEnumerable<tblCollection> tblCollection { get; set; }
 
         public IEnumerable<tblCategory> tblCategory { get; set; }
+        
+        public IEnumerable<tblCategoryTotals> tblCategoryTotals { get; set; }
 
         public IEnumerable<tblItem> tblItem { get; set; }
 
