@@ -9,7 +9,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table table-striped table-hover table-borderless table-responsive border-0">
     <tr>
         <th>
             Category Naam
@@ -20,7 +20,13 @@
             @*@Html.DisplayNameFor(model => model.CategoryBeschrijving)*@
         </th>
         <th>
-            Price Difference Category
+            Total Category Buy Price
+        </th>
+        <th>
+            Total Category Current Price
+        </th>
+        <th>
+            Total Category Price Difference
         </th>
         <th>
             Status
@@ -31,7 +37,8 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model.tblCategory) {
+    @foreach (var item in Model.tblCategoryTotals)
+    {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.CategoryName)
@@ -40,8 +47,13 @@
             @Html.DisplayFor(modelItem => item.CategoryBeschrijving)
         </td>
         <td>
-            @* Zie hoofdstuk 10 in boek om via sql rapporten te maken voor totaal prijs.
-            Get ID category, spreek class aan en geef id mee, return lijst of int met gemaakte winst voor de category*@
+            @Html.DisplayFor(modelItem => item.TotalBuyPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalCurrentPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalPriceDiffrence)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Status)
@@ -49,12 +61,60 @@
         <td>
             @Html.DisplayFor(modelItem => item.StatusBeschrijving)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.CategoryID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })
-        </td>
+        @if (item.Status == "Te Accorderen")
+        {
+            <td>
+                @Html.ActionLink("Controlleer wijziging", "Edit2", new { id = item.CategoryID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CategoryID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })
+            </td>
+        }
+        @if (item.Status == "In orde" || item.Status == "Afgekeurd")
+        {
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CategoryID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })
+            </td>
+        }
     </tr>
-}
+    }
+
+    @foreach (var item in Model.tblCategory)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryBeschrijving)
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusBeschrijving)
+        </td>
+        @if (item.Status == "Te Accorderen wijziging" || item.Status == "Te Accorderen creatie")
+        {
+            <td>
+                @Html.ActionLink("Controlleer wijziging", "Edit2", new { id = item.CategoryID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CategoryID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })
+            </td>
+        }
+        @if (item.Status == "In orde" || item.Status == "Afgekeurd")
+        {
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CategoryID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })
+            </td>
+        }
+    </tr>
+    }
 
 </table>

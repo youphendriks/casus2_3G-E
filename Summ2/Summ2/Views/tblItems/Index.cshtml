@@ -31,7 +31,7 @@
         @Html.ActionLink("Create New", "Create")
     </h6>
 </p>
-<table class="table">
+<table class="table table-striped table-hover table-borderless table-responsive border-0">
     <tr>
         <th>
             Item Name
@@ -93,11 +93,22 @@
         <td>
             @Html.DisplayFor(modelItem => item.StatusBeschrijving)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ItemID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ItemID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ItemID })
-        </td>
+        @if (item.Status == "Te Accorderen wijziging" || item.Status == "Te Accorderen creatie")
+        {
+            <td>
+                @Html.ActionLink("Controlleer wijziging", "Edit2", new { id = item.ItemID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ItemID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ItemID })
+            </td>
+        }
+        @if (item.Status == "In orde" || item.Status == "Afgekeurd")
+        {
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ItemID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ItemID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ItemID })
+            </td>
+        }
     </tr>
     }
 

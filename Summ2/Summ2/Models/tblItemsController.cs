@@ -72,6 +72,7 @@ namespace Summ2.Models
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ItemID,ColletionID,ItemName,ItemBeschrijving,ItemOwned,ItemState,BuyPrice,CurrentPrice")] tblItem tblItem)
         {
+            tblItem.Status = "Te Accorderen creatie";
             if (ModelState.IsValid)
             {
                 db.tblItems.Add(tblItem);
@@ -105,6 +106,39 @@ namespace Summ2.Models
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ItemID,ColletionID,ItemName,ItemBeschrijving,ItemOwned,ItemState,BuyPrice,CurrentPrice")] tblItem tblItem)
+        {
+            tblItem.Status = "Te Accorderen wijziging";
+            if (ModelState.IsValid)
+            {
+                db.Entry(tblItem).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.ColletionID = new SelectList(db.tblCollections, "CollectionID", "CollectionName", tblItem.ColletionID);
+            return View(tblItem);
+        }
+
+        public ActionResult Edit2(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tblItem tblItem = db.tblItems.Find(id);
+            if (tblItem == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.ColletionID = new SelectList(db.tblCollections, "CollectionID", "CollectionName", tblItem.ColletionID);
+            return View(tblItem);
+        }
+
+        // POST: tblParents/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit2([Bind(Include = "ItemID,ColletionID,ItemName,ItemBeschrijving,ItemOwned,ItemState,BuyPrice,CurrentPrice,Status,StatusBeschrijving")] tblItem tblItem)
         {
             if (ModelState.IsValid)
             {

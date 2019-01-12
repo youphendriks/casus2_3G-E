@@ -200,6 +200,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\tblCategoriesController.cs" />
     <Compile Include="Models\tblCategory.cs" />
+    <Compile Include="Models\tblCategoryTotals.cs" />
     <Compile Include="Models\tblCollection.cs" />
     <Compile Include="Models\tblCollectionsController.cs" />
     <Compile Include="Models\tblItem.cs" />
@@ -286,6 +287,10 @@
     <Content Include="Views\tblItemCategories\Details.cshtml" />
     <Content Include="Views\tblItemCategories\Edit.cshtml" />
     <Content Include="Views\tblItemCategories\Index.cshtml" />
+    <Content Include="Views\tblItems\Edit2.cshtml" />
+    <Content Include="Views\tblItemCategories\Edit2.cshtml" />
+    <Content Include="Views\tblCollections\Edit2.cshtml" />
+    <Content Include="Views\tblCategories\Edit2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

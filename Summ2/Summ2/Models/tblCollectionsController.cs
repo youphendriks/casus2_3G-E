@@ -47,6 +47,7 @@ namespace Summ2.Models
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CollectionID,CollectionName,CollectionDiscription")] tblCollection tblCollection)
         {
+            tblCollection.Status = "Te Accorderen creatie";
             if (ModelState.IsValid)
             {
                 db.tblCollections.Add(tblCollection);
@@ -78,6 +79,37 @@ namespace Summ2.Models
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CollectionID,CollectionName,CollectionDiscription")] tblCollection tblCollection)
+        {
+            tblCollection.Status = "Te Accorderen wijziging";
+            if (ModelState.IsValid)
+            {
+                db.Entry(tblCollection).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(tblCollection);
+        }
+
+        public ActionResult Edit2(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tblCollection tblCollection = db.tblCollections.Find(id);
+            if (tblCollection == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tblCollection);
+        }
+
+        // POST: tblCollections/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit2([Bind(Include = "CollectionID,CollectionName,CollectionDiscription,Status,StatusBeschrijving")] tblCollection tblCollection)
         {
             if (ModelState.IsValid)
             {

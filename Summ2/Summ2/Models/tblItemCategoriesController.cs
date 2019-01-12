@@ -50,6 +50,7 @@ namespace Summ2.Models
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ItemCategoryID,ItemID,CategoryID")] tblItemCategory tblItemCategory)
         {
+            tblItemCategory.Status = "Te Accorderen creatie";
             if (ModelState.IsValid)
             {
                 db.tblItemCategories.Add(tblItemCategory);
@@ -85,6 +86,41 @@ namespace Summ2.Models
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ItemCategoryID,ItemID,CategoryID")] tblItemCategory tblItemCategory)
+        {
+            tblItemCategory.Status = "Te Accorderen wijziging";
+            if (ModelState.IsValid)
+            {
+                db.Entry(tblItemCategory).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.CategoryID = new SelectList(db.tblCategories, "CategoryID", "CategoryName", tblItemCategory.CategoryID);
+            ViewBag.ItemID = new SelectList(db.tblItems, "ItemID", "ItemName", tblItemCategory.ItemID);
+            return View(tblItemCategory);
+        }
+
+        public ActionResult Edit2(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tblItemCategory tblItemCategory = db.tblItemCategories.Find(id);
+            if (tblItemCategory == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.CategoryID = new SelectList(db.tblCategories, "CategoryID", "CategoryName", tblItemCategory.CategoryID);
+            ViewBag.ItemID = new SelectList(db.tblItems, "ItemID", "ItemName", tblItemCategory.ItemID);
+            return View(tblItemCategory);
+        }
+
+        // POST: tblItemCategories/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit2([Bind(Include = "ItemCategoryID,ItemID,CategoryID,Status,StatusBeschrijving")] tblItemCategory tblItemCategory)
         {
             if (ModelState.IsValid)
             {
