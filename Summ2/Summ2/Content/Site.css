@@ -2,7 +2,7 @@
 body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background-color: #404040;
+    background-color: #999999;
     color: black;
 }
 
@@ -15,7 +15,7 @@ footer {
 }
 
 th {
-    background-color: #ddd;
+    background-color: #999999;
 }
 
 td {
