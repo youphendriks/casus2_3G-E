@@ -1,9 +1,26 @@
-﻿body {
+﻿
+body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background-color: darkgray;
+    background-color: #999999;
+    color: black;
 }
 
+footer {
+    outline-color: black;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+}
+
+th {
+    background-color: #999999;
+}
+
+td {
+    border-bottom: 1px solid #000000;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
