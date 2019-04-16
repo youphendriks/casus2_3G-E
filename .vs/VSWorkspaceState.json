@@ -3,12 +3,10 @@
     "",
     "\\Summ2",
     "\\Summ2\\Summ2",
-    "\\Summ2\\Summ2\\Models",
-    "\\Summ2\\Summ2\\Views",
-    "\\Summ2\\Summ2\\Views\\tblCategories",
-    "\\Summ2\\Summ2\\Views\\tblItemCategories",
-    "\\Summ2\\Summ2\\Views\\tblItems"
+    "\\Summ2\\Summ2\\Views\\Account",
+    "\\Summ2\\Summ2\\Views\\Home",
+    "\\Summ2\\Summ2\\Views\\tblCategories"
   ],
-  "SelectedNode": "\\Summ2",
+  "SelectedNode": "\\Summ2\\Casus2_3.sln",
   "PreviewInSolutionExplorer": false
 }

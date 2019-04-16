@@ -1,8 +1,8 @@
 ﻿
 body {
-    padding-top: 50px;
+    padding-top: 20px;
     padding-bottom: 20px;
-    background-color: #999999;
+    background-color: #fff;
     color: black;
 }
 
@@ -15,11 +15,11 @@ footer {
 }
 
 th {
-    background-color: #999999;
+    background-color: #fff;
 }
 
 td {
-    border-bottom: 1px solid #000000;
+    border-bottom: 1px solid #fff;
 }
 /* Set padding to keep content from hitting the edges */
 .body-content {
